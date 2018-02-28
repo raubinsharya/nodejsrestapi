@@ -1,0 +1,33 @@
+{
+  "name": "upload",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "*",
+    "email-check": "^1.1.0",
+    "email-validator": "^1.1.1",
+    "express": "*",
+    "express-fileupload": "^0.4.0",
+    "express-handlebars": "^3.0.0",
+    "express-validator": "^4.3.0",
+    "gridfs-stream": "*",
+    "jimp": "^0.2.28",
+    "jsonwebtoken": "^8.1.1",
+    "microseconds": "^0.1.0",
+    "mongoose": "*",
+    "morgan": "^1.9.0",
+    "multer": "*",
+    "multer-gridfs-storage": "*",
+    "node-datetime": "^2.0.6",
+    "nodemailer": "^4.4.2",
+    "serve-favicon": "^2.4.5"
+  }
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Register Nodejs api</title>
+  <link rel="stylesheet" href="../public/css/signup.css">
+  </head>
+
+<body>
+   <button class="back_login" onclick="window.location.href='/'">Back to Login</button>
+  <div id="login-box">
+     
+    <form action="/register" method="POST">
+      <div class="left">
+        <h1>Sign up</h1>    
+        <input type="text" name="username" placeholder="Username" />
+        <input type="text" name="fullname" placeholder="Full name" />
+        <input type="text" name="email" placeholder="E-mail" />
+        <input type="radio" name="gender" value="male" checked> Male
+        <input type="radio" name="gender" value="female"> Female
+        <input type="radio" name="gender" value="other"> Other <br><br> 
+        <input type="password" name="password" placeholder="Password" />
+        <input type="password" name="password2" placeholder="Retype password" />
+        <input type="checkbox">  By clicking Create Account, you agree to our Terms and Conditions <br>
+        <input type="submit" name="signup_submit" value="Sign Up" />
+      </div>
+    </form>
+      
+  <div class="right">
+    <span class="loginwith">Sign in with<br />social network</span>
+    
+    <button class="social-signin facebook">Log in with facebook</button>
+    <button class="social-signin twitter">Log in with Twitter</button>
+    <button class="social-signin google">Log in with Google+</button>
+  </div>
+  <div class="or">OR</div>
+</div>
+  
+  
+
+</body>
+
+</html>
