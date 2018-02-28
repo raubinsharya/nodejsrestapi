@@ -1,4 +1,5 @@
 # Nodejsrestapi
-This rest api is built using Nodejs.
-It has register,login upload file download file and all routes are protected
-It can handle many users simultenously. No body can access without signin
+This rest api is built using Nodejs Express.
+It has register,login,file upload, file download file  and all routes are protected using jwt.
+It can handle many users simultenously. No body can access without login
+Files are stored in disk and file details are maintained in mongodb
