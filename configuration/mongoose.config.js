@@ -5,11 +5,11 @@ let mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 module.exports = (config) => {
-    var dbURI = config.dev.db;
-    mongoose.connect(dbURI, {
+        mongoose.connect(config.dev.db, {
       }).then(() => {
-      console.log(`mongodb connected to ${dbURI}`);
+      console.log(`mongodb connected to ${config.dev.db}`);
     }).catch((e) => {
-      throw e;
+      console.log('Mongodb '+e.message);
+      
     });
 };

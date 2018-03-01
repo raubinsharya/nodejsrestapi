@@ -13,7 +13,6 @@ router.get('/',(req,res)=>{
 router.get('/:pagename',(req,res)=>{
   res.render(req.params.pagename);
 });
-
 router.post('/register',function(req,res){   
 
     var email       = req.body.email;
@@ -21,8 +20,7 @@ router.post('/register',function(req,res){
     var fullname    = req.body.fullname;
     var password    = req.body.password;
     var password2   = req.body.password2;
-
-    // Validation
+ // Validation
     req.checkBody('email'    ,  'Email is required') .notEmpty();
     req.checkBody('email'    ,  'Email is not valid').isEmail();
     req.checkBody('username' ,  'Username is required').notEmpty();
@@ -33,35 +31,27 @@ router.post('/register',function(req,res){
     var errors = req.validationErrors();
       if (errors) {
         res.send(errors[0]);                             //sending json out of array error
-      }else
-      users.registerUser(req.body,function(data){
-      res.send(data);                                   //sending json status
-  });
+      } else users.registerUser(req,res);
 });
 
 router.post('/login',function(req,res){
     var email = req.body.email;
     var password = req.body.password;
-    // Validation
+//  Validation
     req.checkBody('email'    , 'Email is required').notEmpty();
     req.checkBody('email'    , 'Email is not valid').isEmail();
     req.checkBody('password' , 'Password is required').notEmpty();
     req.checkBody('password' , 'Password length should be 8-30 character').notEmpty().len(8,30);
-  
-    //  req.checkBody('dob','D.O.B must be Date').notEmpty().isDate();
+//  req.checkBody('dob'      , 'D.O.B must be Date').notEmpty().isDate();
     var errors = req.validationErrors();
-        if (errors) {
-          res.send(errors[0]);                             //sending json out of array error
-        }else{
-          users.login(req.body,function(value){
-              res.send(value);
-          });
-        }
-   });
+        if (errors) 
+          res.send(errors[0]);                            //sending json out of  error array
+        else users.login(req,res);  
+});
    
-   router.post('/send',(req,res)=>{
-     emails.sendEmail(req,res);
-   });
+router.post('/send',(req,res)=>{
+      emails.sendEmail(req,res);
+});
 
 
 module.exports=router;

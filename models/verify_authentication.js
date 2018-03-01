@@ -2,7 +2,7 @@
 
 const jwt           =   require('jsonwebtoken');
 const mongoose      =   require('mongoose');
-const tokenSchema   =   require('../schema/tokenSchema');
+const tokenSchema   =   require('../schema/dbSchema');
 
 module.exports.verifyToken=function(req, res, next) {
   // Get auth header value
@@ -20,22 +20,24 @@ module.exports.verifyToken=function(req, res, next) {
   } else {
     // Forbidden
      res.status(401);
-     res.json({'status':'un-authenticated access'});
+     res.json({'message':'Token not found in header'});
+     return;
   }
 
 }
 
-module.exports.getToken=function(req, res, next) {
+module.exports.authenticate =function(req, res, next) {
   const query={'token':req.token};
   tokenSchema.userToken.find(query,function(err,tokenData){
      if(tokenData.length>0){
-          req.extras=tokenData[0].secretkey;
+          req.body.user=tokenData[0].email;
           req.user=tokenData[0].email;
           next();
-      }
-      else{ 
-          req.extras='undefined'
-          next();
+      }else{ 
+            res.status(401);
+            res.json({'message':'unauthenticated access'});
+            return;
+            next();
       }
   });
 }

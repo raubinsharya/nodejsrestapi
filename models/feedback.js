@@ -21,8 +21,8 @@ const output = `
         var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-        user: 'raubinshakumar@gmail.com',
-        pass: 'sucessisajourney1234'
+        user: 'from@mail.com',
+        pass: 'yourpassword'
         },tls:{
         rejectUnauthorized:false
         }
@@ -30,8 +30,8 @@ const output = `
 
         // setup email data with unicode symbols
         let mailOptions = {
-        from:    '"Nodemailer Contact" <raubinshakumar@gmail.com>',   // sender address
-        to:      'raubinsharya@gmail.com',                           // list of receivers
+        from:    '"Nodemailer Contact" <from@mail.com>',   // sender address
+        to:      'tomail@mail.com',                           // list of receivers
         subject: 'Node Contact Request',                            // Subject line
         text:    'Hello world?',                                   // plain text body
         html: output                                              // html body

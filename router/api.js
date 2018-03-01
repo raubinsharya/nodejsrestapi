@@ -5,46 +5,24 @@ const Jimp          =   require("jimp");
 
 var uploads         =   require('../models/upload');
 var config          =   require('../configuration/config');
-var support         =   require('../models/support');
-const tokenSchema   =   require('../schema/tokenSchema');
+const dbSchema      =   require('../schema/dbSchema');
 var loadedImage;
 
-router.post('/upload',function(req, res) {  
-         jwt.verify(req.token, req.extras, (err, authData) => {
-        if(err) {
-          res.json({'status':err});
-        } else {
-               uploads.upload(req,res);
-          }
-     }); 
-     //uploads.upload(req,res,req);   
+router.put('/upload',function(req, res) {  
+    uploads.upload(req,res);
 });
-
-  router.get('/file/:filename', function(req,res){
-      uploads.show(req.params.filename,res);
+router.post('/file', function(req,res){
+     uploads.show(req.body.fileName,res);
    });
 
-router.post('/dashboard',(req,res)=>{
-      jwt.verify(req.token,req.extras, (err, authData) => {
-        if(err) {
-          res.json({'status':'unauthenticated user'});
-        } else {
-          res.json({'status':'You are now authenticated','authData':authData});
-            }
-    });
-
-   });
+router.get('/dashboard',(req,res)=>{
+          res.send('You have no dashboard yet...comming soon');
+ });
    router.post('/logout',(req,res)=>{
-    jwt.verify(req.token,req.extras,(err, authData) => {
-      if(err) {
-        res.json({'status':'You have already logged out'});
-      } else {
-        var query={'token':req.token};
-        tokenSchema.userToken.remove(query,(err,data)=>{
+    var query={'token':req.token};
+       dbSchema.userToken.remove(query,(err,data)=>{
             res.json({'status':'You have successfully logged out'});
           });
-            }
-        });
 
  });
 
@@ -59,8 +37,7 @@ router.post('/dashboard',(req,res)=>{
                  loadedImage.print(font,/*x AXIS*/ 1600, /*Y AXIS*/ 1240, 'Camarathon');
                     loadedImage.write(__dirname+'/image.jpg',()=>{
                       res.sendFile(__dirname+'/image.jpg');
-                    });
-                    
+                    });      
     })
     .catch(function (err) {
         console.error(err);
@@ -69,5 +46,23 @@ router.post('/dashboard',(req,res)=>{
 
             
  });
+
+ router.delete('/delete',(req, res)=> {  
+  uploads.deleteFile(req,res);
+ });
+
+ router.get('/all/:content',(req,res)=>{
+        if(req.params.content=='file')
+            dbSchema.saveFileNameInDataBase.find({},(err,data)=>{res.send(data);}).where({'userName':req.body.user});
+        else if(req.params.content=='post')
+            dbSchema.UserPostSchema.find({},(err,data)=>{
+                res.send(data);
+            }).where({'user':req.body.user});
+            else res.json({'message':'request not found'});
+      });
+ router.post('/post',(req,res)=>{
+       uploads.uploadPost(req,res);
+  });
+     
 
  module.exports=router;

@@ -10,6 +10,15 @@ const expressconfig        =   require('./configuration/express.config')(app);
 
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
+/*
+var a=1;
+function test() {
+      a++;
+     console.log('running',a);     
+ }
+ var id = setInterval(test,100); */        //to call a function repeatly after sometime  this will be used to clean unused token
+
+
 
 app.use((req, res, next) => {
     const error = new Error("Not found");

@@ -1,14 +1,14 @@
 {
   "name": "upload",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is rest api to serve every functionality to any app",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "nodemon index.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Raubinsh arya",
+  "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "*",
